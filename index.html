@@ -13,8 +13,8 @@
   #left { flex: 1.1; background: #14161f; display: flex; align-items: center; justify-content: center;
           padding: 40px; }
   #left-inner { text-align: center; }
-  #left-inner svg { width: 120px; height: 120px; }
-  #left-wordmark { font-weight: 700; letter-spacing: 6px; font-size: 44px; color: #f5f6f8; margin-top: 12px; }
+  #left-inner svg { width: 150px; height: auto; }
+  #left-wordmark { font-weight: 700; letter-spacing: 6px; font-size: 44px; color: #f5f6f8; margin-top: 4px; }
   #left-tagline { font-size: 13px; letter-spacing: 4px; color: #6b7280; margin-top: 10px; }
   #right { flex: 1; background: #1a1d29; display: flex; align-items: center; justify-content: center;
            padding: 40px; }
@@ -26,7 +26,7 @@
   @media (max-width: 720px) {
     #wrap { flex-direction: column; }
     #left { flex: none; padding: 50px 20px 30px; }
-    #left-inner svg { width: 80px; height: 80px; }
+    #left-inner svg { width: 100px; }
     #left-wordmark { font-size: 32px; }
   }
 </style>
@@ -35,10 +35,41 @@
 <div id="wrap">
   <div id="left">
     <div id="left-inner">
-      <svg viewBox="0 0 100 100">
-        <ellipse cx="50" cy="62" rx="34" ry="11" fill="#f5a623" opacity="0.55"/>
-        <ellipse cx="50" cy="50" rx="34" ry="11" fill="#f5a623" opacity="0.8"/>
-        <ellipse cx="50" cy="38" rx="34" ry="11" fill="#f5a623"/>
+      <svg viewBox="0 0 200 170">
+        <defs>
+        <g id="isocoin">
+        <path d="M-38 0 A38 15 0 0 0 38 0 L38 14 A38 15 0 0 1 -38 14 Z" fill="#c97e10"/>
+        <g stroke="#a5670c" stroke-width="1.6" opacity="0.7">
+        <line x1="-36" y1="1.5" x2="-36" y2="15.5"/>
+        <line x1="-27" y1="7" x2="-27" y2="21"/>
+        <line x1="-14" y1="11.5" x2="-14" y2="25.5"/>
+        <line x1="0" y1="13" x2="0" y2="27"/>
+        <line x1="14" y1="11.5" x2="14" y2="25.5"/>
+        <line x1="27" y1="7" x2="27" y2="21"/>
+        <line x1="36" y1="1.5" x2="36" y2="15.5"/>
+        </g>
+        <ellipse cx="0" cy="0" rx="38" ry="15" fill="#f5a623"/>
+        <ellipse cx="0" cy="0" rx="38" ry="15" fill="none" stroke="#c97e10" stroke-width="1.5"/>
+        </g>
+        </defs>
+        <g transform="translate(100,120)">
+        <g transform="translate(0,-58)">
+        <use href="#isocoin"/>
+        <use href="#isocoin" y="-20"/>
+        <use href="#isocoin" y="-40"/>
+        <use href="#isocoin" y="-60"/>
+        <use href="#isocoin" y="-80"/>
+        </g>
+        <g transform="translate(-42,6)">
+        <use href="#isocoin"/>
+        <use href="#isocoin" y="-20"/>
+        </g>
+        <g transform="translate(38,10)">
+        <use href="#isocoin"/>
+        <use href="#isocoin" y="-20"/>
+        <use href="#isocoin" y="-40"/>
+        </g>
+        </g>
       </svg>
       <div id="left-wordmark">MONETA</div>
       <div id="left-tagline">FINANCIAL COMMAND CENTRE</div>
