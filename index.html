@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sign in</title>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+  body { font-family: sans-serif; display: flex; align-items: center; justify-content: center;
+         height: 100vh; margin: 0; background: #111; color: #eee; }
+  #box { text-align: center; }
+  #status { margin-top: 14px; font-size: 13px; color: #999; }
+</style>
+</head>
+<body>
+<div id="box">
+  <div id="gBtn"></div>
+  <div id="status">Sign in to continue</div>
+</div>
+<script>
+// This page has ONE job: show the Google Sign-In button, and when the
+// user signs in, postMessage the ID token back to whichever window opened
+// this popup, then close itself.
+//
+// targetOrigin is '*' below because the opener's actual content origin is
+// an Apps Script googleusercontent.com address that can change on redeploy
+// and can't be reliably pinned here. This is an acceptable tradeoff: the ID
+// token is short-lived and its audience (aud claim) is locked to our OAuth
+// Client ID, so even if intercepted by an unintended listener it cannot be
+// used to impersonate the user anywhere else.
+
+var CLIENT_ID = '39512774122-oea55p7a0pq9t4j4l4mp2gobfju5qbhm.apps.googleusercontent.com';
+
+function handleCredentialResponse(response) {
+  document.getElementById('status').textContent = 'Signed in — closing...';
+  if (window.opener) {
+    window.opener.postMessage({ type: 'google-id-token', idToken: response.credential }, '*');
+  }
+  setTimeout(function () { window.close(); }, 400);
+}
+
+function init() {
+  if (typeof google === 'undefined' || !google.accounts) {
+    setTimeout(init, 200);
+    return;
+  }
+  google.accounts.id.initialize({
+    client_id: CLIENT_ID,
+    callback: handleCredentialResponse
+  });
+  google.accounts.id.renderButton(
+    document.getElementById('gBtn'),
+    { theme: 'outline', size: 'large', type: 'standard' }
+  );
+}
+init();
+</script>
+</body>
+</html>
