@@ -4,33 +4,54 @@
 <meta charset="utf-8">
 <title>Moneta</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
-  * { box-sizing: border-box; }
-  body { font-family: 'DM Sans', sans-serif; display: flex; align-items: center; justify-content: center;
-         min-height: 100vh; margin: 0; background: #1a1d29; color: #f5f6f8; }
-  #card { text-align: center; padding: 40px; }
-  #logo { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 8px; }
-  #wordmark { font-weight: 500; letter-spacing: 3px; font-size: 30px; color: #f5f6f8; }
-  #tagline { font-size: 12px; letter-spacing: 3px; color: #6b7280; margin-bottom: 40px; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; }
+  #wrap { display: flex; min-height: 100vh; }
+  #left { flex: 1.1; background: #14161f; display: flex; align-items: center; justify-content: center;
+          padding: 40px; }
+  #left-inner { text-align: center; }
+  #left-inner svg { width: 120px; height: 120px; }
+  #left-wordmark { font-weight: 700; letter-spacing: 6px; font-size: 44px; color: #f5f6f8; margin-top: 12px; }
+  #left-tagline { font-size: 13px; letter-spacing: 4px; color: #6b7280; margin-top: 10px; }
+  #right { flex: 1; background: #1a1d29; display: flex; align-items: center; justify-content: center;
+           padding: 40px; }
+  #card { width: 100%; max-width: 340px; text-align: center; }
+  #card-title { font-size: 22px; font-weight: 500; color: #f5f6f8; margin-bottom: 6px; }
+  #card-sub { font-size: 13px; color: #a0a4b0; margin-bottom: 36px; }
   #gBtn { display: flex; justify-content: center; min-height: 44px; }
   #status { margin-top: 16px; font-size: 13px; color: #a0a4b0; min-height: 18px; }
+  @media (max-width: 720px) {
+    #wrap { flex-direction: column; }
+    #left { flex: none; padding: 50px 20px 30px; }
+    #left-inner svg { width: 80px; height: 80px; }
+    #left-wordmark { font-size: 32px; }
+  }
 </style>
 </head>
 <body>
-<div id="card">
-  <div id="logo">
-    <svg width="44" height="44" viewBox="0 0 100 100">
-      <ellipse cx="50" cy="62" rx="34" ry="11" fill="#f5a623" opacity="0.55"/>
-      <ellipse cx="50" cy="50" rx="34" ry="11" fill="#f5a623" opacity="0.8"/>
-      <ellipse cx="50" cy="38" rx="34" ry="11" fill="#f5a623"/>
-    </svg>
-    <div id="wordmark">MONETA</div>
+<div id="wrap">
+  <div id="left">
+    <div id="left-inner">
+      <svg viewBox="0 0 100 100">
+        <ellipse cx="50" cy="62" rx="34" ry="11" fill="#f5a623" opacity="0.55"/>
+        <ellipse cx="50" cy="50" rx="34" ry="11" fill="#f5a623" opacity="0.8"/>
+        <ellipse cx="50" cy="38" rx="34" ry="11" fill="#f5a623"/>
+      </svg>
+      <div id="left-wordmark">MONETA</div>
+      <div id="left-tagline">FINANCIAL COMMAND CENTRE</div>
+    </div>
   </div>
-  <div id="tagline">FINANCIAL COMMAND CENTRE</div>
-  <div id="gBtn"></div>
-  <div id="status"></div>
+  <div id="right">
+    <div id="card">
+      <div id="card-title">Welcome back</div>
+      <div id="card-sub">Sign in to access your dashboard</div>
+      <div id="gBtn"></div>
+      <div id="status"></div>
+    </div>
+  </div>
 </div>
 <script>
 // ⚠ Set this to your actual Apps Script exec URL.
@@ -41,9 +62,6 @@ var STATUS = document.getElementById('status');
 
 function handleCredentialResponse(response) {
   STATUS.textContent = 'Signed in — loading Moneta…';
-  // Full-page redirect (not a popup) straight into the dashboard, carrying
-  // the verified ID token. doGet() reads it server-side and the dashboard
-  // auto-signs-in with no second button/click on the other end.
   window.location.href = DASHBOARD_EXEC_URL + '?token=' + encodeURIComponent(response.credential);
 }
 
@@ -58,7 +76,7 @@ function init() {
   });
   google.accounts.id.renderButton(
     document.getElementById('gBtn'),
-    { theme: 'filled_black', size: 'large', type: 'standard', text: 'signin_with', shape: 'pill' }
+    { theme: 'filled_black', size: 'large', type: 'standard', text: 'signin_with', shape: 'pill', width: 300 }
   );
 }
 init();
