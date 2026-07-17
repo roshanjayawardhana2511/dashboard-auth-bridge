@@ -10,14 +10,15 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'DM Sans', sans-serif; }
   #wrap { display: flex; min-height: 100vh; }
-  #left { flex: 1.1; background: #14161f; display: flex; align-items: center; justify-content: center;
-          padding: 40px; }
-  #left-inner { text-align: center; }
-  #left-inner svg { width: 150px; height: auto; }
-  #left-wordmark { font-weight: 700; letter-spacing: 6px; font-size: 44px; color: #f5f6f8; margin-top: 4px; }
-  #left-tagline { font-size: 13px; letter-spacing: 4px; color: #6b7280; margin-top: 10px; }
-  #right { flex: 1; background: #1a1d29; display: flex; align-items: center; justify-content: center;
+  #left { flex: 1.1; background-image: url('moneta-hero.png'); background-size: cover;
+          background-position: center; background-repeat: no-repeat; min-height: 100vh; }
+  #right { flex: 1; background: #1a1d29; display: flex; flex-direction: column;
            padding: 40px; }
+  #right-brand { display: flex; align-items: center; gap: 14px; }
+  #right-brand svg { width: 64px; height: auto; }
+  #right-wordmark { font-weight: 700; letter-spacing: 4px; font-size: 28px; color: #f5f6f8; }
+  #right-tagline { font-size: 11px; letter-spacing: 3px; color: #6b7280; margin-top: 2px; }
+  #right-center { flex: 1; display: flex; align-items: center; justify-content: center; }
   #card { width: 100%; max-width: 340px; text-align: center; }
   #card-title { font-size: 22px; font-weight: 500; color: #f5f6f8; margin-bottom: 6px; }
   #card-sub { font-size: 13px; color: #a0a4b0; margin-bottom: 36px; }
@@ -25,16 +26,17 @@
   #status { margin-top: 16px; font-size: 13px; color: #a0a4b0; min-height: 18px; }
   @media (max-width: 720px) {
     #wrap { flex-direction: column; }
-    #left { flex: none; padding: 50px 20px 30px; }
-    #left-inner svg { width: 100px; }
-    #left-wordmark { font-size: 32px; }
+    #left { flex: none; min-height: 220px; }
+    #right-brand svg { width: 44px; }
+    #right-wordmark { font-size: 22px; }
   }
 </style>
 </head>
 <body>
 <div id="wrap">
-  <div id="left">
-    <div id="left-inner">
+  <div id="left"></div>
+  <div id="right">
+    <div id="right-brand">
       <svg viewBox="0 0 200 170">
         <defs>
         <g id="isocoin">
@@ -71,21 +73,22 @@
         </g>
         </g>
       </svg>
-      <div id="left-wordmark">MONETA</div>
-      <div id="left-tagline">FINANCIAL COMMAND CENTRE</div>
+      <div>
+        <div id="right-wordmark">MONETA</div>
+        <div id="right-tagline">FINANCIAL COMMAND CENTRE</div>
+      </div>
     </div>
-  </div>
-  <div id="right">
-    <div id="card">
-      <div id="card-title">Welcome back</div>
-      <div id="card-sub">Sign in to access your dashboard</div>
-      <div id="gBtn"></div>
-      <div id="status"></div>
+    <div id="right-center">
+      <div id="card">
+        <div id="card-title">Welcome back</div>
+        <div id="card-sub">Sign in to access your dashboard</div>
+        <div id="gBtn"></div>
+        <div id="status"></div>
+      </div>
     </div>
   </div>
 </div>
 <script>
-// ⚠ Set this to your actual Apps Script exec URL.
 var DASHBOARD_EXEC_URL = 'https://script.google.com/macros/s/AKfycbw1PXdqc4jHBS17owy7KmG4kEyeWx9KSe2OVLmRglrxkcmC4nUgoCYlZp3GhEcN8_LW/exec';
 
 var CLIENT_ID = '39512774122-oea55p7a0pq9t4j4l4mp2gobfju5qbhm.apps.googleusercontent.com';
